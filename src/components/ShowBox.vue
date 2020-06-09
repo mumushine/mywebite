@@ -24,7 +24,11 @@ export default {
 #showme img{
     height: 350px;
     width: 280px;
-    
+ 
+}
+
+#showme a{
+    text-decoration:none;
 }
 
 #top{
