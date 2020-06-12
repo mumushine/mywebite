@@ -4,20 +4,14 @@
          <div id="board_index" v-for="(item,index) in currentPageData" :key="index"> 
                     
                     <p style="text-align: left">
-                        Breaking &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item}}楼 </span>
+                        Breaking &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item.id}}楼 </span>
                     </p>
                     <p style="text-align: left;height:100px">
-                        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        吴作伟你好帅，我要给你生猴子,啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        吴作伟你好帅，我要给你生猴子
-                        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        吴作伟你好帅，我要给你生猴子
-                        啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊
-                        吴作伟你好帅，我要给你生猴子
+                        {{item.details}}
                     </p>
                     <p style="text-align: right;margin-top:20px">
-                        <span style="margin-right:80%">时间</span>
-                        <span>点赞</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <span style="margin-right:80%">{{item.comment_time}}</span>
+                        <span>点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
                         <span v-on:click="comment()">评论</span>
                     </p>
                     
@@ -106,6 +100,11 @@ export default {
 </script>
 
 <style>
+
+#comment{
+    border: solid 1px #255117;
+    display: none;
+}
 
 
 </style>

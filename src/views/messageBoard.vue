@@ -44,22 +44,22 @@
 <script>
 import Header from '../components/Header.vue';
 import Bootpage from '../components/Bootpage';
+import axios from 'axios';
 export default {
     data(){
         return {
             style: '',
             flag : false,
-            
-            productList:[
-              {id:1},{id:2},{id:3},{id:4},{id:5}
-            ],
-
+            productList:[],
             currentPageData:[]
         }
     },
     components:{
          'v-header' : Header,
          'v-bootpage' : Bootpage,
+    },
+    mounted(){
+        this.handcommentInfo();
     },
     methods:{
         comment1(){
@@ -80,7 +80,34 @@ export default {
         },
         parentFn(childData) {
         this.currentPageData = childData;
+        },
+        handcommentInfo(){
+            const url = 'http://localhost:8090/selectallcomment';
+            axios.post(url).then(
+                res => {
+                    if(res.status == '200'){
+                       for(let i = 0; i < res.data.length; i++){
+                            let item = {};
+                            item.id = res.data[i].id + "";
+                            item.details = res.data[i].details + "";
+                            item.favourable = res.data[i].favourable + "";
+                            item.comment_time = res.data[i].comment_time + "";
+                            this.productList.push(item);
+                       }
+                    }
+                    console.log(this.productList)
+                }
+            ).catch(
+                res => {
+                    
+                },
+            );
+        },
+        clickme(){
+            
+            console.log(this.retuenlist)
         }
+        
 
     }
     
