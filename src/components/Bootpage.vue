@@ -1,17 +1,17 @@
 <!-->这个组件是前端js实现分页信息<!-->
 <template>
  <div class="wrap">
-         <div id="board_index" v-for="(item,index) in currentPageData" :key="index"> 
+         <div id="board_index" v-for="(item,index) in productList " :key="index"> 
                     
                     <p style="text-align: left">
-                        Breaking &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item.id}}楼 </span>
+                       &nbsp&nbsp{{item.username}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item.id}}楼 </span>
                     </p>
                     <p style="text-align: left;height:100px">
-                        {{item.details}}
+                        &nbsp&nbsp{{item.details}}
                     </p>
                     <p style="text-align: right;margin-top:20px">
                         <span style="margin-right:80%">{{item.comment_time}}</span>
-                        <span>点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                        <span @click="likeplus(item.favourable)">点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp
                         <span v-on:click="comment()">评论</span>
                     </p>
                     
@@ -48,29 +48,43 @@ export default {
         };
     },
     mounted() {
+       
         // 计算一共有几页
         this.totalPage = Math.ceil(this.productList.length / this.pageSize);
         // 计算得0时设置为1
         this.totalPage = this.totalPage == 0 ? 1 : this.totalPage;
         this.setCurrentPageData();
+        
     },
     methods: {
         // 设置当前页面数据，对数组操作的截取规则为[0~10],[10~20]...,
         setCurrentPageData() {
             let begin = (this.currentPage - 1) * this.pageSize;
             let end = this.currentPage * this.pageSize;
-            //slice() 方法可从已有的数组中返回选定的元素。
+            /*slice() 方法可从已有的数组中返回选定的元素。*/
             this.currentPageData = this.productList.slice(
                 begin,
                 end
             );
+            /*
+            for(let i=begin; i<end; i++){
+                let item = {};
+                            item.id = productList[i].id + "";
+                            item.details = productList[i].details + "";
+                            item.favourable = productList[i].favourable + "";
+                            item.comment_time = productList[i].comment_time + "";
+                            this.currentPageData.push(item);
+            }
+            */
+            
         },
+
         //上一页
         prevPage() {
+        
             
-            console.log(this.currentPage);
             if (this.currentPage == 1) return;
-         
+            
              this.currentPage--;
              this.setCurrentPageData();
             
@@ -83,9 +97,6 @@ export default {
              this.setCurrentPageData();
             
         },
-        clickme(){
-            this.$emit('childFn', this.currentPageData);
-        },
         comment(){
             this.flag = !this.flag;
             if(this.flag){
@@ -94,7 +105,11 @@ export default {
                 this.style = "display: none";
             }
             
-        },     
+        },   
+        likeplus(favourable){
+            alert(favourable)
+
+        }  
     }
 }
 </script>

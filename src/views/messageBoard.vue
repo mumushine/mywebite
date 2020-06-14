@@ -1,16 +1,43 @@
 <template>
-    <div id="mes">
+    <div id="mian2">
+        <vue-particles
+                class="particles"
+                color="#e8f88d"
+                :particleOpacity="1"
+                :particlesNumber="120"
+                shapeType="star"
+                :particleSize="4"
+                linesColor="#dedede"
+                :linesWidth="1"
+                :lineLinked="true"
+                :lineOpacity="0.4"
+                :linesDistance="150"
+                :moveSpeed="2"
+                :hoverEffect="true"
+                hoverMode="grab"
+                :clickEffect="true"
+                clickMode="push"
+                
+            />
+        <div id="mes">
          <v-header></v-header>
            <div id="head">
                <div id="head_img">
-                   <img src="../assets/logo.jpeg" style="width: 100px;height: 100px;">
+                   <img src="../assets/logo.jpeg" style="width: 126px;height: 126px;">
                 </div>
                <div id="head_detail"> 
                    <h1>Breaking.X</h1><br>
-                   <p>自闭小吴的空间</p>
+                   <ul>
+                       <li>主页</li>
+                       <li>相册</li>
+                       <li>日志</li>
+                       <li>说说</li>
+                       <li>留言栏</li>
+                  
+                   </ul>
                 </div>
                 <div id="weather">
-                    这里以后会是天气
+                    <img src="../assets/weather.jpeg" alt="" height="100px">
                 </div>
            </div>
            <div id="main">
@@ -22,11 +49,10 @@
                 </dir>
                 <div id="board_top">
                         <div>
-                        <h4>留言板（999)</h4>
+                        <h4>留言板（{{productList.length}})</h4>
                         </div>
                         <div style="margin-top:2.5%;margin-left:76%;padding-left:%1">
-                            <span>上一页</span>
-                            <span>下一页</span>
+                            留言栏设置
                         </div>
                 </div>
                 <hr>
@@ -37,7 +63,8 @@
                </div>
                
            </div>
-           <child-com @childFn="parentFn"></child-com>
+           </div>
+          
     </div>
     
 </template>
@@ -50,7 +77,10 @@ export default {
         return {
             style: '',
             flag : false,
-            productList:[],
+            productList:[
+             
+            ],
+
             currentPageData:[]
         }
     },
@@ -89,13 +119,14 @@ export default {
                        for(let i = 0; i < res.data.length; i++){
                             let item = {};
                             item.id = res.data[i].id + "";
+                            item.username = res.data[i].username + "";
                             item.details = res.data[i].details + "";
                             item.favourable = res.data[i].favourable + "";
                             item.comment_time = res.data[i].comment_time + "";
                             this.productList.push(item);
                        }
                     }
-                    console.log(this.productList)
+                    
                 }
             ).catch(
                 res => {
@@ -115,13 +146,13 @@ export default {
 </script>
 <style scoped>
 #mes{
-   
+   position: relative;
 }
 
 #head{
  width: 80%;
  margin-left: 10%;
- border: solid 2px #255117;
+
  display: flex
 }
 
@@ -132,9 +163,23 @@ export default {
 
 #head_detail{
    margin-left: 2%;
+   width: 300px;
+}
+
+#head_detail ul{
+    list-style:none;
+    margin-left: -40px;
+    
+}
+
+#head_detail li{
+    display: inline;
+    line-height: 40px;
+    margin-left: 10px;
 }
 
 #weather{
+    padding-top: 20px;
     margin-left: 50%;
 }
 
@@ -150,6 +195,7 @@ export default {
 }
 
 #main h3,#main h4{
+    color: #255117;
     text-align: left;
 }
 
@@ -165,5 +211,17 @@ export default {
 
 #bootpage{
     margin-bottom: 100px;
+}
+
+#particles-js{
+        width: 100%;
+        height: 100%;
+        position: fixed;
+        overflow: hidden;    
+}
+
+#main2{
+    height: 100%;
+    width: 100%;
 }
 </style>
