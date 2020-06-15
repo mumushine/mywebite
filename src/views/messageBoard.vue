@@ -37,7 +37,11 @@
                    </ul>
                 </div>
                 <div id="weather">
-                    <img src="../assets/weather.jpeg" alt="" height="100px">
+                    {{weather.forecast[0].date}}
+                    {{weather.forecast[0].type}} <br><br>
+                    {{weather.forecast[0].fengxiang}}
+                    {{weather.forecast[0].low}}~~{{weather.forecast[0].high}} <br><br>
+                    温馨提示：{{weather.ganmao}}
                 </div>
            </div>
            <div id="main">
@@ -52,11 +56,11 @@
                         <h4>留言板（{{productList.length}})</h4>
                         </div>
                         <div style="margin-top:2.5%;margin-left:76%;padding-left:%1">
-                            留言栏设置
+                            <button @click="openMask">我要留言</button>
                         </div>
                 </div>
                 <hr>
-                    
+                <v-dialog v-model="sendVal" type="confirm" title="留言框"  v-on:cancel="clickCancel()" @danger="clickDanger()" @confirm="clickConfirm()" dangerText="Delete"/>    
                 
                 <div id="bootpage" style="margin-bottom: 100px;border: solid 1px #255117;" >
                 <v-bootpage :productList="productList"></v-bootpage>
@@ -69,27 +73,29 @@
     
 </template>
 <script>
-import Header from '../components/Header.vue';
-import Bootpage from '../components/Bootpage';
-import axios from 'axios';
+import Header from '../components/Header.vue'
+import Bootpage from '../components/Bootpage'
+import axios from 'axios'
+import Dialog from '../components/Dialog'
 export default {
     data(){
         return {
             style: '',
             flag : false,
-            productList:[
-             
-            ],
-
-            currentPageData:[]
+            productList:[],
+            weather:[],
+            currentPageData:[],
+            sendVal: false,
         }
     },
     components:{
          'v-header' : Header,
          'v-bootpage' : Bootpage,
+         'v-dialog' : Dialog
     },
     mounted(){
         this.handcommentInfo();
+        this.handweatherInfo();
     },
     methods:{
         comment1(){
@@ -125,8 +131,7 @@ export default {
                             item.comment_time = res.data[i].comment_time + "";
                             this.productList.push(item);
                        }
-                    }
-                    
+                    } 
                 }
             ).catch(
                 res => {
@@ -134,10 +139,22 @@ export default {
                 },
             );
         },
-        clickme(){
-            
-            console.log(this.retuenlist)
-        }
+        handweatherInfo(){
+            const url = 'http://localhost:8090/get/临安' 
+            axios.post(url).then(
+                 res => {
+                     
+                     if(res.status == 200){
+                        this.weather = res.data.data;
+                      
+                        console.log(this.weather.forecast[0].date)
+                     }
+                 }
+            )
+        },
+        openMask(index){
+            this.sendVal = true;
+        },
         
 
     }
@@ -180,7 +197,8 @@ export default {
 
 #weather{
     padding-top: 20px;
-    margin-left: 50%;
+    width: 300px;
+    margin-left: 30%;
 }
 
 

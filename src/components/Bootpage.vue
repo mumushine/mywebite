@@ -1,8 +1,7 @@
 <!-->这个组件是前端js实现分页信息<!-->
 <template>
  <div class="wrap">
-         <div id="board_index" v-for="(item,index) in productList " :key="index"> 
-                    
+         <div id="board_index" v-for="(item,index) in currentPageData " :key="index"> 
                     <p style="text-align: left">
                        &nbsp&nbsp{{item.username}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item.id}}楼 </span>
                     </p>
@@ -11,12 +10,13 @@
                     </p>
                     <p style="text-align: right;margin-top:20px">
                         <span style="margin-right:80%">{{item.comment_time}}</span>
-                        <span @click="likeplus(item.favourable)">点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp
-                        <span v-on:click="comment()">评论</span>
+                        <span @click="likeplus(item.id)">点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp
+                        <span v-on:click="comment(index)" :id=index+1>{{currentid==index?'收起':''}}评论</span>
                     </p>
-                    
-                        <textarea name="" id="comment" cols="30" rows="10" :style="style"></textarea>
-                   
+                        <div  v-show="currentid===index">
+                            <textarea v-focus   cols="30" rows="10" style="display:block"></textarea>
+                        </div>
+                       
                     <hr>
                 </div>
         
@@ -33,20 +33,31 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
     props:{
         productList:[],
     },
     data() {
         return {
-            style: '',
+            currentid: null,
             flag : false,
             totalPage: 1, // 统共页数，默认为1
             currentPage: 1, //当前页数 ，默认为1
-            pageSize: 2, // 每页显示数量
+            pageSize: 5, // 每页显示数量
             currentPageData: [], //当前页显示内容           
         };
     },
+    directives:{
+        'focus':{
+            update(el,binding){
+                console.log(el)
+                el.focus()
+            }
+        }
+    },
+        
     mounted() {
        
         // 计算一共有几页
@@ -97,17 +108,39 @@ export default {
              this.setCurrentPageData();
             
         },
-        comment(){
-            this.flag = !this.flag;
-            if(this.flag){
-                this.style = "display: block";
-            }else{
-                this.style = "display: none";
+        comment(index,$event){
+            console.log(event.target)
+            if(this.currentid==null){
+                this.currentid=index
+            }else if(this.currentid!=index){
+                this.currentid=index
+            }else if(this.currentid==index){
+                this.currentid= null
             }
+           
+        }, 
+       
+        likeplus(id){  
+            let i = id - 1;
+            this.productList[i].favourable =  parseInt(this.productList[i].favourable)+1;
+            const url = 'http://localhost:8090/addfavourable';
+            axios.get(url, 
+                {  
+                    params:{
+                       id : id
+                    }            
+                }
+            ).then((response) => {
+                    console.log(response.data)
+            })/*
+            axios({
+                method: 'post',
+                url: 'http://localhost:8090/addfavourable',
+                data: id,
+                timeout: 1000,
+                
+            });*/
             
-        },   
-        likeplus(favourable){
-            alert(favourable)
 
         }  
     }
@@ -121,5 +154,7 @@ export default {
     display: none;
 }
 
-
+#reply{
+    
+}
 </style>
