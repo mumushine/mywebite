@@ -2,8 +2,9 @@
     <div class="dialog" v-show="showMask">
         <div class="dialog-container">
             <div class="dialog-title">{{title}}</div>
-            <div class="content" >
-                <textarea  v-model="details" style="width: 450px;height: 250px;" maxlength="255"></textarea>
+            <div class="content">
+                请输入留言账号：<input type="text" v-model="username" required>
+                <textarea  v-model="details" style="width: 400px;height: 200px;" maxlength="255" required></textarea>
             </div>
             <div class="btns">
                 <div v-if="type == 'confirm'" class="default-btn" @click="closeBtn">
@@ -18,7 +19,6 @@
             </div>
             <div class="close-btn" @click="closeMask"><i class="iconfont icon-close"></i></div>
         </div>
-        
     </div>
 </template>
 <script>
@@ -57,6 +57,7 @@ export default {
         return{
             showMask: false,
             details: null,
+            username: null,
             cominfo:[]
         }
     },
@@ -74,9 +75,23 @@ export default {
         },
         confirmBtn(){
             this.$emit('confirm');
-            this.cominfo.push({
-                details : this.details
-            })
+            if(this.details != null && this.username!= null){
+                this.cominfo.push({
+                    details : this.details,
+                    username : this.username
+                })
+                this.addcomment()
+            }else{
+                alert("请输入你的名字或者内容")
+            }   
+
+            this.closeMask();
+            location.reload();//对当前页面进行刷新
+
+            
+        },
+        addcomment(){//新增评论
+
             console.log(this.cominfo[0])
 
             let hh = JSON.stringify(this.cominfo[0])
@@ -91,7 +106,6 @@ export default {
             ).then((response) => {
                     console.log(response.data)
             })
-            this.closeMask();
         }
     },
     mounted(){
