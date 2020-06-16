@@ -45,7 +45,7 @@ export default {
             flag : false,
             totalPage: 1, // 统共页数，默认为1
             currentPage: 1, //当前页数 ，默认为1
-            pageSize: 5, // 每页显示数量
+            pageSize: 50, // 每页显示数量
             currentPageData: [], //当前页显示内容           
         };
     },
@@ -121,7 +121,7 @@ export default {
         }, 
        
         likeplus(id){  
-            let i = id - 1;
+            let i =  this.productList.length - id;
             this.productList[i].favourable =  parseInt(this.productList[i].favourable)+1;
             const url = 'http://localhost:8090/addfavourable';
             axios.get(url, 
@@ -130,7 +130,8 @@ export default {
                        id : id
                     }            
                 }
-            ).then((response) => {
+            )
+           .then((response) => {
                     console.log(response.data)
             })/*
             axios({
@@ -154,7 +155,5 @@ export default {
     display: none;
 }
 
-#reply{
-    
-}
+
 </style>
