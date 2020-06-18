@@ -18,11 +18,11 @@ import unilife from  '@/views/views2/unilife'
 Vue.use(Router)
 
 export default new Router({
-  mode: 'history',
+  //mode: 'history',//跳转时不带#号
   routes: [
     {
       path: '/',
-      name: 'Cover',
+      name: 'cover',
       component: cover
     },
     {
@@ -63,14 +63,17 @@ export default new Router({
         {
           path: 'growth',
           redirect: '/growth',
+          name: 'growth',
           component:  growth
         },{
           path: 'dayily',
           redirect: '/dayily',
+          name: 'dayily',
           component:  dayily
         },{
           path: 'unilife',
           redirect: '/unilife',
+          name: '/unilife',
           component: unilife
         }
       ]
@@ -82,14 +85,17 @@ export default new Router({
     },
     {
       path: '/dayily',
+      name: 'dayily',
       component: dayily
     },
     {
       path: '/unilife',
+      name: 'unilife',
       component: unilife
     },
     {
       path: '/growth',
+      name: 'growth',
       component: growth
     }
   ]
