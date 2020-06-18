@@ -1,30 +1,25 @@
 # mywebsite
 
-> A Vue.js project
+>我的个人页面初版
+实现，对于各个页面的初步设计，与后台的交互功能
+具体实现：
+Cover[封面]：设计了个人logo，通过点击图片，超链接进我的个人页面首页
+index[首页]：关于本站的首页设计，包括头部组件，欢迎语句，个人展示组件
+myInfo[我的信息]：关于个人的一个介绍，包括头部组件，介绍个人的主部分，个人展示组件
+*myblogs[我的博客]：展示个人写的博客，包括头部组件，标题摘要目录，个人博客信息简介，博客展示区（关于文章的简介）
+mylife[我的生活]: 展示我的生活，包括一个头部组件，一个轮播栏
+*messageBoard[我的留言板]：对我的留言，包括头部组件，天气组件，对我的留言栏信息（后台对接，实现留言，点赞等功能）
 
-## Build Setup
+目前遗留问题：
+单位不统一问题（多用px，偶尔用%，希望单位统一）
+头部栏悬浮为顶部
+吃像素问题（标签多用像素丢失问题）
+头部导航栏，二级导航栏设计问题（原，绝对定位，希望改为相对定位）
+vue项目耦合度太高（体现于留言栏页面）
+代码框架设计有问题，没有用最新的知识，有点乱，只能算是勉强设计
 
-``` bash
-# install dependencies
-npm install
 
-# serve with hot reload at localhost:8080
-npm run dev
+总结
 
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+和别人的交流下发现， 我直接用vue-cli框架，搭建，好像有点好高骛远了。决心回去补充知识。
+第二版本计划，优化项目结构，开始进行项目解藕，解决如上问题。并对项目的整体的进行美化
