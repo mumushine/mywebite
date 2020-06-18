@@ -118,7 +118,7 @@ export default {
         this.currentPageData = childData;
         },
         handcommentInfo(){
-            const url = 'http://localhost:8090/selectallcomment';
+            const url = 'http://120.27.247.102:8090/selectallcomment';
             axios.post(url).then(
                 res => {
                     if(res.status == '200'){
@@ -140,7 +140,7 @@ export default {
             );
         },
         handweatherInfo(){
-            const url = 'http://localhost:8090/get/临安' 
+            const url = 'http://120.27.247.102:8090/get/临安' 
             axios.post(url).then(
                  res => {
                      

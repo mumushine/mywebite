@@ -123,7 +123,7 @@ export default {
         likeplus(id){  
             let i =  this.productList.length - id;
             this.productList[i].favourable =  parseInt(this.productList[i].favourable)+1;
-            const url = 'http://localhost:8090/addfavourable';
+            const url = 'http://120.27.247.102:8090/addfavourable';
             axios.get(url, 
                 {  
                     params:{
