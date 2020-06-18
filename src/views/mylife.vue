@@ -1,6 +1,6 @@
 
 <template>
-    <div id="main">   
+    <div>   
         <v-header/>
         <div><v-slider :imgArray="imgArray"></v-slider></div>
         

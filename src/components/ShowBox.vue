@@ -2,7 +2,7 @@
     <div id="showme">
         <div id="top"> hello！That's me.</div>
         <img src="../assets/me1.jpeg" alt=""><br>
-        <a href="/myinfo">About me</a>
+        <a href="#/myinfo">About me</a>
     </div>
 </template>
 

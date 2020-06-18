@@ -1,6 +1,8 @@
 <template>
   <div id="main">
-      <a href="/index"><img src="../assets/long1.jpeg" alt=""></a>
+      <router-link to="/index">
+      <img src="../assets/long1.jpeg" alt="">
+      </router-link>
       <v-bottom></v-bottom>
   </div>
 </template>
