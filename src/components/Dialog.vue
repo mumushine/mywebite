@@ -100,7 +100,7 @@ export default {
             let hhh = qs.stringify(this.cominfo[0])
             console.log(hhh)
             
-            const url = 'http://120.27.247.102:8090/insertallcomment?' 
+            const url = 'http://localhost:8090/insertallcomment?' 
               axios.post(url + hhh
                
             ).then((response) => {

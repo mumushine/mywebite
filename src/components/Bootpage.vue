@@ -3,14 +3,14 @@
  <div class="wrap">
          <div id="board_index" v-for="(item,index) in currentPageData " :key="index"> 
                     <p style="text-align: left">
-                       &nbsp&nbsp{{item.username}} &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<span>{{item.id}}楼 </span>
+                      {{item.username}} <span>{{item.id}}楼 </span>
                     </p>
                     <p style="text-align: left;height:100px">
-                        &nbsp&nbsp{{item.details}}
+                       {{item.details}}
                     </p>
                     <p style="text-align: right;margin-top:20px">
                         <span style="margin-right:80%">{{item.comment_time}}</span>
-                        <span @click="likeplus(item.id)">点赞({{item.favourable}})</span>&nbsp&nbsp&nbsp&nbsp
+                        <span @click="likeplus(item.id)">点赞({{item.favourable}})</span>
                         <span v-on:click="comment(index)" :id=index+1>{{currentid==index?'收起':''}}评论</span>
                     </p>
                         <div  v-show="currentid===index">
@@ -123,7 +123,7 @@ export default {
         likeplus(id){  
             let i =  this.productList.length - id;
             this.productList[i].favourable =  parseInt(this.productList[i].favourable)+1;
-            const url = 'http://120.27.247.102:8090/addfavourable';
+            const url = 'http://localhost:8090/addfavourable';
             axios.get(url, 
                 {  
                     params:{
