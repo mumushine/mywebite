@@ -2,20 +2,20 @@
     <div id="max">
 	<nav v-bind:class="active" >
 		<img id="logo" src="../assets/mumu.png" alt="/" height="90px" width="200px">
-		<a href="#/index" class="home" v-on:mouseover="mouseover1()" v-on:mouseleave="mouseleave1()" :style="style1">首页</a>
-		<a href="#/myinfo" class="projects" v-on:mouseover="mouseover2()" v-on:mouseleave="mouseleave2()" :style="style2">个人名片</a>
-		<a href="#/myblogs" class="services" v-on:mouseover="mouseover3()" v-on:mouseleave="mouseleave3()" :style="style3">技术博客</a>
-		<a href="#/careerPlan" class="contact" v-on:mouseover="mouseover4()" v-on:mouseleave="mouseleave4()" :style="style4">职业生涯</a>
-		<a href="#/mylife" class="contact" v-on:mouseover="mouseover5()" v-on:mouseleave="mouseleave5()" :style="style5">我的生活
+		<router-link to="/index" class="home" v-on:mouseover="mouseover1()" v-on:mouseleave="mouseleave1()" :style="style1">首页</router-link>
+		<router-link to="/myinfo" class="projects" v-on:mouseover="mouseover2()" v-on:mouseleave="mouseleave2()" :style="style2">个人名片</router-link>
+		<router-link to="/myblogs" class="services" v-on:mouseover="mouseover3()" v-on:mouseleave="mouseleave3()" :style="style3">技术博客</router-link>
+		<router-link to="/careerPlan" class="contact" v-on:mouseover="mouseover4()" v-on:mouseleave="mouseleave4()" :style="style4">职业生涯</router-link>
+		<router-link to="/mylife" class="contact" v-on:mouseover="mouseover5()" v-on:mouseleave="mouseleave5()" :style="style5">我的生活
 		<div id="test" ref="test">
 			<ul style="list-style-type:none;">
-				<li><a href="#/mylife/growth">成长经历</a></li>
-				<li><a href="#/mylife/unilife">大学生活</a></li>
-				<li><a href="#/mylife/dayily">我的日常</a></li>
+				<li><router-link to="/mylife/growth">成长经历</router-link>></li>
+				<li><router-link to="/mylife/unilife">大学生活</router-link></li>
+				<li><router-link to="/mylife/dayily">我的日常</router-link></li>
 			</ul>
 		</div>
-		</a>
-		<a href="#/messageBoard" class="contact" v-on:mouseover="mouseover6()" v-on:mouseleave="mouseleave6()" :style="style6">留言板</a>
+		</router-link>
+		<router-link to="/messageBoard" class="contact" v-on:mouseover="mouseover6()" v-on:mouseleave="mouseleave6()" :style="style6">留言板</router-link>
 	</nav>
 		
     </div>
