@@ -14,7 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "less-loader": "^4.1.0",
     "live2d-widget-model-hijiki": "^1.0.5",
     "qs": "^6.9.4",
